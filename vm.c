@@ -27,7 +27,7 @@ int main (int argc, char *argv[])
 //opening input and output files
   f = fopen (argv[1], "r");
   wr = fopen("outputfile.txt", "w");
-  
+   
   fprintf(wr, "Gino Benitez\n");
 
   int sp = 0;
@@ -65,6 +65,8 @@ int main (int argc, char *argv[])
       
       //increment pc by 2
       m = pas[pc + 2];
+
+	  pc = pc + 3;
     
     //opcode cases
       switch (op)
