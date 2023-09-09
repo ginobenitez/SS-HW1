@@ -55,7 +55,8 @@ int main (int argc, char *argv[])
     bool val;
   
     int flag = 1;
-  
+    fprintf(wr, "\t\t\t\tPC BP SP stack\n");
+    fprintf(wr, "Initial values: %d\t%d\t%d\n\n");
     while (flag)
     {   
         //if pc reaches max break
@@ -81,66 +82,66 @@ int main (int argc, char *argv[])
                 pas[sp] = m;
                 break;
 	        case 2:
-                fprintf (wr,"OPR\n");
+                
                 switch(m){
                     case 0:
-                        fprintf(wr,"RTN\n");
+                        fprintf(wr,"RTN");
                         sp = bp - 1;
                         bp = pas[sp + 2];
                         pc = pas[sp  + 3];
                         break;
                     case 1:
-                        fprintf(wr,"ADD\n");
+                        fprintf(wr,"ADD");
                         pas[sp - 1] = pas[sp -1] + pas[sp];
                         sp = sp - 1;
                         break;
                     case 2:
-                        fprintf(wr,"SUB\n");
+                        fprintf(wr,"SUB");
                         pas[sp - 1] = pas[sp -1] - pas[sp];
                         sp = sp - 1;
                         break;
                     case 3:
-                        fprintf(wr,"MUL\n");
+                        fprintf(wr,"MUL");
                         pas[sp - 1] = pas[sp -1] * pas[sp];
                         sp = sp - 1;
                         break;
                     case 4:
-                        fprintf(wr,"DIV\n");
+                        fprintf(wr,"DIV");
                         pas[sp - 1] = pas[sp -1] / pas[sp];
                         sp = sp - 1;
                         break;
                     case 5:
-                        fprintf(wr,"EQL\n");
+                        fprintf(wr,"EQL");
                         val = (pas[sp -1] == pas[sp]);
                         pas[sp - 1] = val;
                         sp = sp - 1;
                         break;
                     case 6:
-                        fprintf(wr,"NEQ\n");
+                        fprintf(wr,"NEQ");
                         val = (pas[sp -1] != pas[sp]);
                         pas[sp - 1] = val;
                         sp = sp - 1;
                         break;
                     case 7:
-                        fprintf(wr,"LSS\n");
+                        fprintf(wr,"LSS");
                         val = (pas[sp -1] < pas[sp]);
                         pas[sp - 1] = val;
                         sp = sp - 1;
                         break;
                     case 8:
-                        fprintf(wr,"LEQ\n");
+                        fprintf(wr,"LEQ");
                         val = (pas[sp -1] <= pas[sp]);
                         pas[sp - 1] = val;
                         sp = sp - 1;
                         break;
                     case 9:
-                        fprintf(wr,"GTR\n");
+                        fprintf(wr,"GTR");
                         val = (pas[sp -1] > pas[sp]);
                         pas[sp - 1] = val;
                         sp = sp - 1;
                         break;
                     case 10:
-                        fprintf(wr,"GEQ\n");
+                        fprintf(wr,"GEQ");
                         val = (pas[sp -1] >= pas[sp]);
                         pas[sp - 1] = val;
                         sp = sp - 1;
@@ -148,17 +149,17 @@ int main (int argc, char *argv[])
                 }
                 break;
             case 3:// DONE
-                fprintf (wr,"LOD\n");
+                fprintf (wr,"LOD");
                 sp = sp + 1;
                 pas[sp] = pas[base(bp, l) + m];
                 break;
             case 4:
-                fprintf (wr,"STO\n");
+                fprintf (wr,"STO");
                 pas[base(bp, l) + m] = pas[sp];
                 sp = sp - 1;
                 break;
             case 5:
-                fprintf (wr,"CAL\n");
+                fprintf (wr,"CAL");
                 pas[sp + 1] = base(bp, l);
                 pas[sp + 2] = bp;
                 pas[sp + 3] = pc;
@@ -166,7 +167,7 @@ int main (int argc, char *argv[])
                 pc = m;
                 break;
             case 6:
-                fprintf (wr,"INC\n");
+                fprintf (wr,"INC");
                 sp = sp + m;
                 break;
             case 7:
@@ -179,7 +180,7 @@ int main (int argc, char *argv[])
                 break;
             case 9:
                 if(m == 1){
-                    fprintf(wr,"%d\n", pas[sp]);
+                    fprintf(wr,"Output result is: %d\n", pas[sp]);
                     sp = sp - 1;
                 }
                 else if(m == 2){
@@ -207,8 +208,8 @@ int main (int argc, char *argv[])
                 fprintf (wr,"%d", vm->dm[i]);   
             fprintf (wr,"]\n");
         } */
-        printf("%d %d %d\n", pc, bp, sp);
-        fprintf(wr,"%d %d %d\n", pc, bp, sp);
+        printf("%d %d %d %d %d\n", l, m, pc, bp, sp);
+        fprintf(wr,"%d %d %d %d %d\n", l, m, pc, bp, sp);
     }
     // Close files and exit program
     fclose (f);
