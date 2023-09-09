@@ -24,8 +24,11 @@ int main (int argc, char *argv[])
     int pc, l, m;// Program Counter, Lexicographical Level, operation
     int op;
 
+    // juan do not remove argv[1] lol
+    /*argv[1]*/
+
 	//opening input and output files
-  	f = fopen (argv[1], "r");
+  	f = fopen ("elf.txt", "r");
   	wr = fopen("outputfile.txt", "w");
   	fprintf(wr, "Gino Benitez\n");
 
@@ -46,6 +49,8 @@ int main (int argc, char *argv[])
     l = 0;
     m = 0;
     op= 0;
+
+    bool value;
   
     int flag = 1;
   
@@ -58,13 +63,13 @@ int main (int argc, char *argv[])
         op = pas[pc];
       
         // instruction register
-        l = pas[pc +1];
+        l = pas[pc + 1];
       
         //increment pc by 2
         m = pas[pc + 2];
 
 	    pc = pc + 3;
-    
+
         //opcode cases
         switch (op)
 	    {
@@ -74,10 +79,71 @@ int main (int argc, char *argv[])
                 pas[sp] = m;
                 break;
 	        case 2:
-                fprintf (wr,"ADD\n");
-                // *====*
-                // |TODO|
-                // *====*
+                fprintf (wr,"OPR\n");
+                switch(m){
+                    case 0:
+                        fprintf(wr,"RTN\n");
+                        sp = bp - 1;
+                        bp = pas[sp = 2];
+                        pc = pas[sp  + 3];
+                        break;
+                    case 1:
+                        fprintf(wr,"ADD\n");
+                        pas[sp - 1] = pas[sp -1] + pas[sp];
+                        sp = sp - 1;
+                        break;
+                    case 2:
+                        fprintf(wr,"SUB\n");
+                        pas[sp - 1] = pas[sp -1] - pas[sp];
+                        sp = sp - 1;
+                        break;
+                    case 3:
+                        fprintf(wr,"MUL\n");
+                        pas[sp - 1] = pas[sp -1] * pas[sp];
+                        sp = sp - 1;
+                        break;
+                    case 4:
+                        fprintf(wr,"DIV\n");
+                        pas[sp - 1] = pas[sp -1] / pas[sp];
+                        sp = sp - 1;
+                        break;
+                    case 5:
+                        fprintf(wr,"EQL\n");
+                        val = (pas[sp -1] == pas[sp]);
+                        pas[sp - 1] = val;
+                        sp = sp - 1;
+                        break;
+                    case 6:
+                        fprintf(wr,"NEQ\n");
+                        val = (pas[sp -1] != pas[sp]);
+                        pas[sp - 1] = val;
+                        sp = sp - 1;
+                        break;
+                    case 7:
+                        fprintf(wr,"LSS\n");
+                        val = (pas[sp -1] < pas[sp]);
+                        pas[sp - 1] = val;
+                        sp = sp - 1;
+                        break;
+                    case 8:
+                        fprintf(wr,"LEQ\n");
+                        val = (pas[sp -1] <= pas[sp]);
+                        pas[sp - 1] = val;
+                        sp = sp - 1;
+                        break;
+                    case 9:
+                        fprintf(wr,"GTR\n");
+                        val = (pas[sp -1] > pas[sp]);
+                        pas[sp - 1] = val;
+                        sp = sp - 1;
+                        break;
+                    case 10:
+                        fprintf(wr,"GEQ\n");
+                        val = (pas[sp -1] >= pas[sp]);
+                        pas[sp - 1] = val;
+                        sp = sp - 1;
+                        break;
+                }
                 break;
             case 3:// DONE
                 fprintf (wr,"LOD\n");
@@ -110,6 +176,19 @@ int main (int argc, char *argv[])
                 sp = sp - 1;
                 break;
             case 9:
+                if(m == 1){
+                    fprintf(wr,"%d\n", pas[sp]);
+                    sp = sp - 1;
+                }
+                else if(m == 2){
+                    sp = sp + 1;
+                    printf("Please Enter an Integer: ");
+                    scanf("%d", &pas[sp]);
+                    fprintf(wr,"Please Enter an Integer: %d\n", pas[sp]);
+                }
+                else if (m ==3){
+                    flag = 0;
+                }
                 // *====*
                 // |TODO|
                 // *====*
@@ -126,7 +205,7 @@ int main (int argc, char *argv[])
                 fprintf (wr,"%d", vm->dm[i]);   
             fprintf (wr,"]\n");
         } */
-
+        fprintf(wr,"%d %d %d\n", pc, sp, bp);
     }
     // Close files and exit program
     fclose (f);
