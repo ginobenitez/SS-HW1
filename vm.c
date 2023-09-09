@@ -44,6 +44,7 @@ int main (int argc, char *argv[])
       	sp+=3;
     }
 
+    sp = sp - 1;
     // setting tiny virtual machine variables to 0
     int bp = sp + 1;
     pc = 0;
