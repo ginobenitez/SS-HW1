@@ -56,7 +56,7 @@ int main (int argc, char *argv[])
   
     int flag = 1;
     fprintf(wr, "\t\t\t\tPC BP SP stack\n");
-    fprintf(wr, "Initial values: %d\t%d\t%d\n\n");
+    fprintf(wr, "Initial values: %d\t%d\t%d\n\n", pc, bp,sp);
     while (flag)
     {   
         //if pc reaches max break
