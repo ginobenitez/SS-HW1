@@ -207,6 +207,7 @@ int main (int argc, char *argv[])
                 fprintf (wr,"%d", vm->dm[i]);   
             fprintf (wr,"]\n");
         } */
+        printf("%d %d %d\n", pc, bp, sp);
         fprintf(wr,"%d %d %d\n", pc, bp, sp);
     }
     // Close files and exit program
