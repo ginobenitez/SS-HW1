@@ -1,6 +1,7 @@
 //Gino Benitez
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 //file pointers
 FILE *f;
@@ -50,7 +51,7 @@ int main (int argc, char *argv[])
     m = 0;
     op= 0;
 
-    bool value;
+    bool val;
   
     int flag = 1;
   
