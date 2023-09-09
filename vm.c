@@ -44,7 +44,7 @@ int main (int argc, char *argv[])
       	sp+=3;
     }
 
-    //sp = sp - 1;
+    sp = sp - 1;
     // setting tiny virtual machine variables to 0
     int bp = sp + 1;
     pc = 0;
@@ -86,7 +86,7 @@ int main (int argc, char *argv[])
                     case 0:
                         fprintf(wr,"RTN\n");
                         sp = bp - 1;
-                        bp = pas[sp = 2];
+                        bp = pas[sp + 2];
                         pc = pas[sp  + 3];
                         break;
                     case 1:
