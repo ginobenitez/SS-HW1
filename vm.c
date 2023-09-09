@@ -155,7 +155,7 @@ int main (int argc, char *argv[])
             case 4:
                 fprintf (wr,"STO\n");
                 pas[base(bp, l) + m] = pas[sp];
-                sp = sp + 1;
+                sp = sp - 1;
                 break;
             case 5:
                 fprintf (wr,"CAL\n");
