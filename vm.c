@@ -55,7 +55,7 @@ int main (int argc, char *argv[])
     bool val;
   
     int flag = 1;
-    fprintf(wr, "\t\t\t\tPC BP SP stack\n");
+    fprintf(wr, "\t\t\t\tPC\tBP\tSP\tstack\n");
     fprintf(wr, "Initial values: %d\t%d\t%d\n\n", pc, bp,sp);
     while (flag)
     {   
