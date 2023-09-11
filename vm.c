@@ -202,7 +202,13 @@ int main (int argc, char *argv[])
 	    }
         // Print Output
         printf("%d\t%d\t%d\t%d \t%d\n", l, m, pc, bp, sp);
-        fprintf(wr,"%d\t%d\t%d\t%d \t%d\n", l, m, pc, bp, sp);
+        fprintf(wr,"%d\t%d\t%d\t%d \t%d  ", l, m, pc, bp, sp);
+        
+        for(int i =0; i < 6; i++){
+            fprintf(wr,"%d ", pas[sp + i]);
+        }
+
+        fprintf(wr,"\n");
     }
     // Close files and exit program
     fclose (f);
