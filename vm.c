@@ -26,20 +26,23 @@ int base(int BP, int L)
 
 void printing(int BP, int L, int SP){
     
-    int arb = BP;
+    int x = BP;
     
-    if(L <= 0){
-        printf(wr, "\n");
+    if(L < 0){
+        fprintf(wr, "\n");
         return;
     }
     
+    //fprintf(wr,"level %d ", L);
     for(int i = arb; i <= SP; i ++){
+
+        //if(BP == arb){
+             //fprintf(wr, "| ");
+        //}
             fprintf(wr, "%d ", pas[i]);
         }
         
-    if(L > 1){
-            fprintf(wr, "| ");
-        }
+    //fprintf(wr, "| ");
     
     arb = pas[arb];
     return printing(arb, L-1, SP);
