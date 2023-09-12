@@ -15,9 +15,34 @@ int base(int BP, int L)
     while (L > 0)
     {
         arb = pas[arb];
+        
+        //fprintf(wr, "%d\n", pas[arb]);
         L--;
     }
+    
+    //fprintf(wr,"\n");
     return arb;
+}
+
+void printing(int BP, int L, int SP){
+    
+    int arb = BP;
+    
+    if(L <= 0){
+        printf(wr, "\n");
+        return;
+    }
+    
+    for(int i = arb; i <= SP; i ++){
+            fprintf(wr, "%d ", pas[i]);
+        }
+        
+    if(L > 1){
+            fprintf(wr, "| ");
+        }
+    
+    arb = pas[arb];
+    return printing(arb, L-1, SP);
 }
 
 int main (int argc, char *argv[])
@@ -204,11 +229,14 @@ int main (int argc, char *argv[])
         printf("%d\t%d\t%d\t%d \t%d\n", l, m, pc, bp, sp);
         fprintf(wr,"%d\t%d\t%d\t%d \t%d  ", l, m, pc, bp, sp);
         
-        for(int i =0; i < 6; i++){
-            fprintf(wr,"%d ", pas[sp + i]);
+        //int x = bp;
+        
+        /*for(int x = bp; x <= sp; x++){
+            fprintf(wr,"%d ", pas[x]);
         }
-
-        fprintf(wr,"\n");
+        
+            fprintf(wr,"\n");*/
+        printing(bp,l,sp);
     }
     // Close files and exit program
     fclose (f);
