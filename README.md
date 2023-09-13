@@ -1,3 +1,6 @@
+
+# SS-HW1
+
 ====================
 COP3402 - Homework 1
  By:
@@ -5,7 +8,6 @@ COP3402 - Homework 1
      Juan Penuela
 ====================
 
-# SS-HW1
 Virtual Machine Program Instructions
 
 1. On the terminal of your local computer or Eustis, please type "gcc vm.c"
