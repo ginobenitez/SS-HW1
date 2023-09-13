@@ -298,7 +298,8 @@ int main (int argc, char *argv[])
 
                 
             if(x != initialbp && x % 6 ==0)
-            {fprintf(wr,  "| " );}
+            {
+                fprintf(wr,  "| " );}
 
                 printf("%d ", pas[x]);
                 fprintf(wr,"%d ", pas[x]);
