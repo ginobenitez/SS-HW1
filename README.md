@@ -1,3 +1,10 @@
+====================
+COP3402 - Homework 1
+ By:
+     Gino Benitez
+     Juan Penuela
+====================
+
 # SS-HW1
 Virtual Machine Program Instructions
 
