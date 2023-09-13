@@ -34,6 +34,30 @@ int base(int BP, int L)
     return arb;
 }
 
+void arPrint(int BP, int L)
+{
+    int arb = BP;
+    while (L > 0)
+    {
+        for(int i = arb; i < pas[arb]; i++){
+        fprintf(wr, "%d ", pas[i]);
+
+        }
+
+        fprintf(wr, "| ");
+
+        arb = pas[arb];
+        //fprintf(wr, "%d\n", pas[arb]);
+        L--;
+    }
+    
+    for(int i = arb; i < pas[arb]; i++){
+        fprintf(wr, "%d ", pas[i]);
+
+        }
+    fprintf(wr,"\n");
+}
+
 int main (int argc, char *argv[])
 {
     // Fill up the Stack array
@@ -63,9 +87,14 @@ int main (int argc, char *argv[])
       	sp+=3;
     }
 
+    for(int i = sp; i < 512; i++)
+    {
+        pas[i]= 0;    }
+
     sp = sp - 1;
     // Setting tiny virtual machine variables to 0
     int bp = sp + 1;
+    int initialbp = bp;
     pc = 0;
     l = 0;
     m = 0;
@@ -199,10 +228,12 @@ int main (int argc, char *argv[])
                 pas[sp + 3] = pc;
                 bp = sp + 1;
                 pc = m;
+                
                 break;
             case 6:
                 printf ("\tINC  ");
                 fprintf (wr,"\tINC  ");
+                int val = sp;
                 sp = sp + m;
                 break;
             case 7:
@@ -214,7 +245,7 @@ int main (int argc, char *argv[])
                 printf("\tJPC  ");
                 fprintf(wr, "\tJPC  ");
                 if (pas[sp] == 0)
-                    pc = m;
+                    {pc = m;}
                 sp = sp - 1;
                 break;
             case 9:
@@ -249,24 +280,32 @@ int main (int argc, char *argv[])
         // the stack as needed.
 
         // Print stack???
-        counterArr[0] = 3;
+       /* counterArr[0] = 3;
         for (int i = 5; i >= 0; i--)
         {
             printf("%d ", counterArr[i]);
             fprintf(wr, "%d ", counterArr[i]);
         }
-
+        */
 
         // The rest of the output was unchanged,
         // I'm sure you can work around this :D
-        printf("| ");
-        fprintf(wr, "| ");   
-            for(int x = bp; x <= sp; x++)
+      // printf("| ");
+        //(fprintfwr, | "");   
+            for(int x = initialbp; x <= sp; x++)
             {
                 int curr = pas[x];
+
+                
+            if(x != initialbp && x % 6 ==0)
+            {fprintf(wr,  "| " );}
+
                 printf("%d ", pas[x]);
                 fprintf(wr,"%d ", pas[x]);
+                
             }
+
+        //arPrint(bp,l);
         printf("\n");
         fprintf(wr,"\n");
     }
