@@ -60,7 +60,7 @@ int main (int argc, char *argv[])
 	//opening input and output files
   	f = fopen ("elf.txt", "r");
   	wr = fopen("outputfile.txt", "w");
-  	fprintf(wr, "Gino Benitez\n");
+  	fprintf(wr, "Gino Benitez & Juan Penuela\n");
 
   	int bp = 0; // Stack Pointer
 	char buf [100]; //buffer for input
