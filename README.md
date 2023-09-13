@@ -4,7 +4,7 @@
 ====================
 COP3402 - Homework 1
  By:
-     Gino Benitez
+     Gino Benitez & 
      Juan Penuela
 ====================
 
