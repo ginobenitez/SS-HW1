@@ -5,19 +5,15 @@
 //      Juan Penuela
 // ====================
 
-// GINO SIDE NOTE: I changed the program so it prints
-// both to the console and the output file. This should
-// make it easier for you to debug.
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#define MAX_SIZE 512
 
 // File pointers
 FILE *f;
 FILE *wr;
 int pas[512];
-int counterArr[6];
 
 // Base function
 int base(int BP, int L)
@@ -34,62 +30,33 @@ int base(int BP, int L)
     return arb;
 }
 
-void arPrint(int BP, int L)
-{
-    int arb = BP;
-    while (L > 0)
-    {
-        for(int i = arb; i < pas[arb]; i++){
-        fprintf(wr, "%d ", pas[i]);
-
-        }
-
-        fprintf(wr, "| ");
-
-        arb = pas[arb];
-        //fprintf(wr, "%d\n", pas[arb]);
-        L--;
-    }
-    
-    for(int i = arb; i < pas[arb]; i++){
-        fprintf(wr, "%d ", pas[i]);
-
-        }
-    fprintf(wr,"\n");
-}
-
 int main (int argc, char *argv[])
 {
-    // Fill up the Stack array
-    for (int i = 0; i < 6; i++)
-        counterArr[i] = 0;
-
     // Program Counter, Lexicographical Level, operation
     int pc, l, m;
     int op;
 
 	// Opening input and output files
-    f = fopen ("elf.txt", "r"); // <-- For Debugging
-  	// f = fopen (argv[1], "r"); // <-- For submission
+  	f = fopen (argv[1], "r"); // <-- For submission
   	wr = fopen("outputfile.txt", "w");
 
     // Print Names to file
   	fprintf(wr, "Gino Benitez, Juan Penuela\n");
 
-  	int sp = 0; // Stack Pointer
-	char buf [100]; //buffer for input
+    // Stack Pointer and Buffer
+  	int sp = 0;
+	char buf [100];
 
  	// While file has a line
     while (fgets(buf,100,f))
     {
         //scan in the integers only
         sscanf (buf, "%d %d %d", &(pas[sp]), &(pas[sp+1]), &pas[sp+2]);
-      	sp+=3;
+      	sp += 3;
     }
 
-    for(int i = sp; i < 512; i++)
-    {
-        pas[i]= 0;    }
+    for(int i = sp; i < MAX_SIZE; i++)
+        pas[i]= 0;    
 
     sp = sp - 1;
     // Setting tiny virtual machine variables to 0
@@ -99,13 +66,14 @@ int main (int argc, char *argv[])
     l = 0;
     m = 0;
     op= 0;
-
     bool val;
-  
     int flag = 1;
+
+    // Print values
     printf("\t\tPC\tBP\tSP\tstack\n");
     fprintf(wr, "\t\t\t\tPC\tBP\tSP\tstack\n");
     fprintf(wr, "Initial values: %d\t%d\t%d\n\n", pc, bp,sp);
+
     while (flag)
     {   
         // If pc reaches max break
@@ -228,7 +196,6 @@ int main (int argc, char *argv[])
                 pas[sp + 3] = pc;
                 bp = sp + 1;
                 pc = m;
-                
                 break;
             case 6:
                 printf ("\tINC  ");
@@ -269,44 +236,23 @@ int main (int argc, char *argv[])
                 fprintf(wr, "\tSYS  ");
                 break;
 	    }
+        
         // Print Output
         printf("%d\t%d\t%d\t%d \t%d\t", l, m, pc, bp, sp);
         fprintf(wr,"%d\t%d\t%d\t%d\t%d\t", l, m, pc, bp, sp);
         
-        
-        // IMPORTANT: counterArr is the array I used to 
-        // represent the stack, the for loop below just
-        // prints it backwards, so you can add stuff to 
-        // the stack as needed.
-
-        // Print stack???
-       /* counterArr[0] = 3;
-        for (int i = 5; i >= 0; i--)
+        for(int x = initialbp; x <= sp; x++)
         {
-            printf("%d ", counterArr[i]);
-            fprintf(wr, "%d ", counterArr[i]);
-        }
-        */
+            int curr = pas[x];
 
-        // The rest of the output was unchanged,
-        // I'm sure you can work around this :D
-      // printf("| ");
-        //(fprintfwr, | "");   
-            for(int x = initialbp; x <= sp; x++)
+            if(x != initialbp && x % 6 == 0)
             {
-                int curr = pas[x];
-
-                
-            if(x != initialbp && x % 6 ==0)
-            {
-                fprintf(wr,  "| " );}
-
-                printf("%d ", pas[x]);
-                fprintf(wr,"%d ", pas[x]);
-                
+                printf("|  ");
+                fprintf(wr,  "| " );
             }
-
-        //arPrint(bp,l);
+            printf("%d ", pas[x]);
+            fprintf(wr,"%d ", pas[x]);
+        }
         printf("\n");
         fprintf(wr,"\n");
     }
