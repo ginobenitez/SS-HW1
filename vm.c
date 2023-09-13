@@ -24,6 +24,7 @@ int base(int BP, int L)
     return arb;
 }
 
+/*
 void printing(int BP, int L, int SP){
     
     int x = BP;
@@ -46,7 +47,7 @@ void printing(int BP, int L, int SP){
     
     arb = pas[arb];
     return printing(arb, L-1, SP);
-}
+}*/
 
 int main (int argc, char *argv[])
 {
@@ -61,20 +62,20 @@ int main (int argc, char *argv[])
   	wr = fopen("outputfile.txt", "w");
   	fprintf(wr, "Gino Benitez\n");
 
-  	int sp = 0; // Stack Pointer
+  	int bp = 0; // Stack Pointer
 	char buf [100]; //buffer for input
 
  	//while file has a line
     while (fgets(buf,100,f))
     {
         //scan in the integers only
-        sscanf (buf, "%d %d %d", &(pas[sp]), &(pas[sp+1]), &pas[sp+2]);
-      	sp+=3;
+        sscanf (buf, "%d %d %d", &(pas[bp]), &(pas[bp+1]), &pas[bp+2]);
+      	bp+=3;
     }
 
-    sp = sp - 1;
+   // bp = bp - 1;
     // setting tiny virtual machine variables to 0
-    int bp = sp + 1;
+    int sp = bp - 1;
     pc = 0;
     l = 0;
     m = 0;
@@ -231,15 +232,12 @@ int main (int argc, char *argv[])
         // Print Output
         printf("%d\t%d\t%d\t%d \t%d\n", l, m, pc, bp, sp);
         fprintf(wr,"%d\t%d\t%d\t%d \t%d  ", l, m, pc, bp, sp);
-        
-        //int x = bp;
-        
-        /*for(int x = bp; x <= sp; x++){
-            fprintf(wr,"%d ", pas[x]);
+
+
+        for(int i = bp; i <= sp; i++){
+            fprintf(wr,"%d ", pas[i]);
         }
-        
-            fprintf(wr,"\n");*/
-        printing(bp,l,sp);
+            fprintf(wr,"\n");
     }
     // Close files and exit program
     fclose (f);
